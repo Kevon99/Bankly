@@ -13,6 +13,8 @@ const commands = {
     getAllData: 'get allData',
     getDebts: 'get debts',
     setDebts: 'set debts',
+    getWishlist: 'get wishList',
+    setWishList: 'add wishList',
     exit: 'exit'
 }
 
@@ -22,11 +24,13 @@ const table = [
     {option: 'change History', command: commands.setHistory},
     {option: 'change Budget', command: commands.setBudget},
     {option: 'change your debts value', command: commands.setDebts},
+    {option: 'add a object to your wishlist', command: commands.setWishList},
     {option: 'see your new credit', command: commands.getCredit},
     {option: 'see your History', command: commands.getHistory},
     {option: 'see the Budget', command: commands.getBudget},
     {option: 'see the debts', command: commands.getDebts},    
     {option: 'see all the data', command: commands.getAllData},
+    {option: 'see your wishlist', command: commands.getWishlist},
     {option: 'exit', command: commands.exit}
 ]
 
@@ -72,6 +76,14 @@ const main = async () => {
 
                 case commands.setDebts:
                     await setData.setDebts()
+                    break;
+
+                case commands.setWishList:
+                    await setData.setWishList()
+                    break;
+                
+                case commands.getWishlist:
+                    await getData.getWishList()
                     break;
 
                 case commands.exit:

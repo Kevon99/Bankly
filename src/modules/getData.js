@@ -127,7 +127,6 @@ const getWishList = async () => {
 
 }
 
-getWishList()
 
 
 

@@ -90,11 +90,13 @@ const setWishList = async () => {
     }
 }
 
-setWishList()
+
+
 
 module.exports = {
     askQuestion,
     setBudget,
     setHistory,
-    setDebts
+    setDebts,
+    setWishList
 }
