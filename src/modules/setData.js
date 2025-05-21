@@ -69,6 +69,28 @@ const setDebts = async () => {
     }
 }
 
+const setWishList = async () => {
+    try{
+        const name = await askQuestion('Set the name of the object that do you want to add: ')
+        const value = await askQuestion('Set the priece of the object: ')
+        const valueNumber = Number(value)
+        if(isNaN(valueNumber)){
+            throw new Error('the value is not valid')
+        }
+
+        const readData = await fs.readFile(jsonPath, 'utf-8')
+        const data = JSON.parse(readData)
+        
+        data.wishList.push({object: name, priece: valueNumber})
+        await fs.writeFile(jsonPath, JSON.stringify(data, null, 2), 'utf-8')
+
+
+    }catch(error){
+        console.error('there was an error on the function setWishList on setData', error.message)
+    }
+}
+
+setWishList()
 
 module.exports = {
     askQuestion,

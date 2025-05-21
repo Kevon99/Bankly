@@ -106,21 +106,29 @@ const getDebts = async () => {
 }
 
 const getWishList = async () => {
-    const readData = await fs.readFile(path.jsonPath, 'utf-8')
-    let data = JSON.parse(readData)
 
-    const table = []
-    for(let i = data.wishList.lenght - 1; i >= 0; i-- ){
-        table.push({
-            object: data.wishList[i].objeto,
-            priece: data.wishList[i].precio 
-        })
+    try{
+
+        const readData = await fs.readFile(path.jsonPath, 'utf-8')
+        let data = JSON.parse(readData)
+
+        const table = []
+        for(let i = data.wishList.length - 1; i >= 0; i-- ){
+            table.push({
+                object: data.wishList[i].object,
+                priece: data.wishList[i].priece 
+            })
+        }
+
+        console.table(table)
+    }catch(error){
+        console.error('there was an error on the function getWishList from getData', error.message)
     }
 
-    console.table(table)
 }
 
 getWishList()
+
 
 
 module.exports = {
