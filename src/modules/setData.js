@@ -53,9 +53,26 @@ const setHistory = async () =>{
     }
 }
 
+const setDebts = async () => {
+    try{
+        const response = await askQuestion('how many money do you debt?: ')
+        const value = Number(response)
+        if(isNaN(value)){
+            throw new Error('the value is not valid')
+        }
+        const readData = await fs.readFile(jsonPath, 'utf-8')
+        const data = JSON.parse(readData)
+        data.debts = value
+        await fs.writeFile(jsonPath, JSON.stringify(data, null, 2))
+    }catch(error){
+        console.error('There was an error on the function setDebts', error.message)
+    }
+}
+
 
 module.exports = {
     askQuestion,
     setBudget,
-    setHistory
+    setHistory,
+    setDebts
 }

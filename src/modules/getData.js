@@ -80,7 +80,9 @@ const getAllData = async () => {
         const table = [
             {data: 'history', value: data.history},
             {data: 'budget', value: data.budget},
-            {data: 'credit', value: data.credit}
+            {data: 'credit', value: data.credit},
+            {data: 'debts', value: data.debts}
+
         ]
         console.table(table)
     }catch(error){
@@ -89,10 +91,43 @@ const getAllData = async () => {
 }
 
 
+const getDebts = async () => {
+    try{
+        const readData = await fs.readFile(path.jsonPath, 'utf-8')
+        let data = JSON.parse(readData)
+        const debts = data.debts
+        if(isNaN(debts)){
+            throw new Error('there was an error in the archive data.json, with the debts values')
+        }
+        console.log(`the debts in your account have a total of : ${debts}`)
+    }catch(error){
+        console.error("There was an error in the function getDebts: " , error.message)
+    }
+}
+
+const getWishList = async () => {
+    const readData = await fs.readFile(path.jsonPath, 'utf-8')
+    let data = JSON.parse(readData)
+
+    const table = []
+    for(let i = data.wishList.lenght - 1; i >= 0; i-- ){
+        table.push({
+            object: data.wishList[i].objeto,
+            priece: data.wishList[i].precio 
+        })
+    }
+
+    console.table(table)
+}
+
+getWishList()
+
 
 module.exports = {
     getCredit,
     getHistory,
     getBudget,
-    getAllData
+    getAllData,
+    getDebts,
+    getWishList
 }

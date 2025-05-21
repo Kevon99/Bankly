@@ -1,5 +1,6 @@
 {
-  "budget": 1000,
-  "credit": 500,
-  "history": 1000
+  "budget": 0,
+  "credit": 0,
+  "history": 0,
+  "debts": 1
 }
