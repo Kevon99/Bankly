@@ -7,7 +7,6 @@ const setData = require('./modules/setData');
 const commands = {
     setHistory : 'set history',
     setBudget : 'set budget',
-    getCredit : 'get credit',
     getHistory : 'get history',
     getBudget : 'get budget',
     getAllData: 'get allData',
@@ -25,12 +24,12 @@ const table = [
     {option: 'change Budget', command: commands.setBudget},
     {option: 'change your debts value', command: commands.setDebts},
     {option: 'add a object to your wishlist', command: commands.setWishList},
-    {option: 'see your new credit', command: commands.getCredit},
     {option: 'see your History', command: commands.getHistory},
     {option: 'see the Budget', command: commands.getBudget},
     {option: 'see the debts', command: commands.getDebts},    
     {option: 'see all the data', command: commands.getAllData},
     {option: 'see your wishlist', command: commands.getWishlist},
+    {option: 'set a new object to your wish list', command: commands.setWishList},
     {option: 'exit', command: commands.exit}
 ]
 
@@ -52,10 +51,6 @@ const main = async () => {
                 
                 case commands.setBudget:
                     await setData.setBudget()
-                    break;
-                
-                case commands.getCredit:
-                    await getData.getCredit()
                     break;
 
                 case commands.getHistory:
@@ -84,6 +79,10 @@ const main = async () => {
                 
                 case commands.getWishlist:
                     await getData.getWishList()
+                    break;
+
+                case commands.setWishList:
+                    await setData.setWishList()
                     break;
 
                 case commands.exit:

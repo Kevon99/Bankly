@@ -34,8 +34,6 @@ const getCredit = async () =>{
 
         await fs.writeFile(path.jsonPath, JSON.stringify(data, null, 2))
 
-        console.log('This is your credit: ', data.credit)
-
 
     }catch(error){
         console.error("There was an error in the function getCredit: ", error.message)
@@ -53,6 +51,7 @@ const getHistory = async () => {
             throw new Error("there was an error in t he archive data.json in the value of history")
         }
         console.log(`Your history has a total of: ${history}`)
+        getCredit()
     }catch(error){
         console.error("there was an error in the function getHistory: ", error.message)
     }
@@ -68,6 +67,7 @@ const getBudget = async () => {
             throw new Error('there was an error in the archive data.json, with the budget values')
         }
         console.log(`the budget of the bank is : ${budget}`)
+        getCredit()
     }catch(error){
         console.error("There was an error in the function getBudget: " , error.message)
     }
@@ -85,6 +85,8 @@ const getAllData = async () => {
 
         ]
         console.table(table)
+
+        getCredit()
     }catch(error){
         console.error('there was an error on printing the table: ', error.message)
     }

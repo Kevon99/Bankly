@@ -1,6 +1,7 @@
 const fs = require('fs/promises')
 const readline = require('readline');
-const {jsonPath} = require('./config') 
+const {jsonPath} = require('./config');
+const {getCredit} = require('./getData') 
 
 const askQuestion = (query) => {
     return new Promise((resolve) => {
@@ -29,7 +30,7 @@ const setBudget = async () => {
         data.budget = value
 
         await fs.writeFile(jsonPath, JSON.stringify(data, null, 2))
-
+        getCredit()
     }catch(error){
         console.error('There was an error on the specification of the number: ' , error.message)
     }
@@ -47,7 +48,7 @@ const setHistory = async () =>{
         data.history = value
 
         await fs.writeFile(jsonPath, JSON.stringify(data, null, 2))
-
+        getCredit()
     }catch(error){
         console.error('There was an error on setting the values of history: ', error.message)
     }
@@ -61,9 +62,10 @@ const setDebts = async () => {
             throw new Error('the value is not valid')
         }
         const readData = await fs.readFile(jsonPath, 'utf-8')
-        const data = JSON.parse(readData)
+        let data = JSON.parse(readData)
         data.debts = value
         await fs.writeFile(jsonPath, JSON.stringify(data, null, 2))
+        getCredit()
     }catch(error){
         console.error('There was an error on the function setDebts', error.message)
     }
@@ -79,12 +81,12 @@ const setWishList = async () => {
         }
 
         const readData = await fs.readFile(jsonPath, 'utf-8')
-        const data = JSON.parse(readData)
+        let data = JSON.parse(readData)
         
         data.wishList.push({object: name, priece: valueNumber})
         await fs.writeFile(jsonPath, JSON.stringify(data, null, 2), 'utf-8')
 
-
+        getCredit()
     }catch(error){
         console.error('there was an error on the function setWishList on setData', error.message)
     }
