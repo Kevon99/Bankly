@@ -113,12 +113,19 @@ const getWishList = async () => {
 
         const readData = await fs.readFile(path.jsonPath, 'utf-8')
         let data = JSON.parse(readData)
-
+        
         const table = []
         for(let i = data.wishList.length - 1; i >= 0; i-- ){
+            let need = data.wishList[i].priece - data.credit
+            if(need <= 0){
+                need = "you can buy this"
+            }
+            
             table.push({
                 object: data.wishList[i].object,
-                priece: data.wishList[i].priece 
+                priece: data.wishList[i].priece,
+                need : need,
+                
             })
         }
 

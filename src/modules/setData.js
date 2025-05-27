@@ -1,6 +1,6 @@
 const fs = require('fs/promises')
 const readline = require('readline');
-const {jsonPath} = require('./config');
+const {jsonPath,taxes} = require('./config');
 const {getCredit} = require('./getData') 
 
 const askQuestion = (query) => {
@@ -92,6 +92,26 @@ const setWishList = async () => {
     }
 }
 
+const setTaxes = async () => {
+    try{
+        const readFile = await fs.readFile(jsonPath, 'utf-8')
+        let data = JSON.parse(readFile)
+
+        // variables
+
+        const salary_per_month = await askQuestion('how amount money is your salary?: ')
+        const salary = Number(salary_per_month)
+        
+        const taxe = taxes(salary)
+        data.taxes = taxe
+
+        await fs.writeFile(jsonPath, JSON.stringify(data, null, 2), 'utf-8')
+
+    }catch(error){
+        console.log(error)
+    }
+}
+
 
 
 
@@ -100,5 +120,6 @@ module.exports = {
     setBudget,
     setHistory,
     setDebts,
-    setWishList
+    setWishList,
+    setTaxes
 }

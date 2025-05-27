@@ -14,12 +14,14 @@ const commands = {
     setDebts: 'set debts',
     getWishlist: 'get wishList',
     setWishList: 'add wishList',
+    setTaxes: 'set taxes',
     exit: 'exit'
 }
 
 
 
 const table = [
+    {option: 'set your taxes :(', command : commands.setTaxes},
     {option: 'change History', command: commands.setHistory},
     {option: 'change Budget', command: commands.setBudget},
     {option: 'change your debts value', command: commands.setDebts},
@@ -47,6 +49,10 @@ const main = async () => {
             switch (response.trim()){
                 case commands.setHistory:
                     await setData.setHistory()
+                    break;
+
+                case commands.setTaxes:
+                    await setData.setTaxes()
                     break;
                 
                 case commands.setBudget:

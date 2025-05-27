@@ -1,12 +1,14 @@
 {
-  "budget": 100,
-  "credit": 20,
+  "budget": 200,
+  "credit": 40,
   "history": 0,
   "debts": 0,
   "wishList": [
     {
-      "object": "mamo",
-      "priece": 2000
+      "object": "mouse",
+      "priece": 430
     }
-  ]
+  ],
+  "taxes": 6000,
+  "salary": 0
 }
