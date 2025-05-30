@@ -2,13 +2,13 @@
   "budget": 200,
   "credit": 40,
   "history": 0,
-  "debts": 0,
+  "debts": 160,
   "wishList": [
     {
       "object": "mouse",
       "priece": 430
     }
   ],
-  "taxes": 6000,
-  "salary": 0
+  "taxes": 180,
+  "Objetive": []
 }

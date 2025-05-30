@@ -7,10 +7,15 @@ const taxes = (salary) => {
     return taxe
 }
 
+const erroMessage = (funcion,error) => {
+    console.error(`There was an error on the function: ${funcion}`, error.message)
+}
+
 
 module.exports = {
     jsonPath: path.join(__dirname,'..', 'data', 'data.json'),
-    taxes
+    taxes,
+    erroMessage
     
 }
 

@@ -1,13 +1,12 @@
 const fs = require('fs/promises');
-const path = require('./config');
-
+const {jsonPath,erroMessage} = require('./config');
 
 
 const getCredit = async () =>{
 
     try{
         // Generar el objeto con la data
-        const readData = await fs.readFile(path.jsonPath, 'utf-8')
+        const readData = await fs.readFile(jsonPath, 'utf-8')
         let data = JSON.parse(readData)
 
         // Asignacion de variables
@@ -36,7 +35,7 @@ const getCredit = async () =>{
 
 
     }catch(error){
-        console.error("There was an error in the function getCredit: ", error.message)
+        erroMessage("getCredit",error)
     }
 
 }
@@ -44,7 +43,7 @@ const getCredit = async () =>{
 
 const getHistory = async () => {
     try{
-        const readData = await fs.readFile(path.jsonPath, 'utf-8')
+        const readData = await fs.readFile(jsonPath, 'utf-8')
         let data = JSON.parse(readData)
         let history = data.history
         if(isNaN(history)){
@@ -53,14 +52,14 @@ const getHistory = async () => {
         console.log(`Your history has a total of: ${history}`)
         getCredit()
     }catch(error){
-        console.error("there was an error in the function getHistory: ", error.message)
+        erroMessage('getHistory',error)
     }
 }
 
 
 const getBudget = async () => {
     try{
-        const readData = await fs.readFile(path.jsonPath, 'utf-8')
+        const readData = await fs.readFile(jsonPath, 'utf-8')
         let data = JSON.parse(readData)
         const budget = data.budget
         if(isNaN(budget)){
@@ -69,13 +68,13 @@ const getBudget = async () => {
         console.log(`the budget of the bank is : ${budget}`)
         getCredit()
     }catch(error){
-        console.error("There was an error in the function getBudget: " , error.message)
+        erroMessage('getBudget',error)
     }
 }
 
 const getAllData = async () => {
     try{
-        const readData = await fs.readFile(path.jsonPath, 'utf-8')
+        const readData = await fs.readFile(jsonPath, 'utf-8')
         let data = JSON.parse(readData)
         const table = [
             {data: 'history', value: data.history},
@@ -88,14 +87,14 @@ const getAllData = async () => {
 
         getCredit()
     }catch(error){
-        console.error('there was an error on printing the table: ', error.message)
+        erroMessage('getAllData',error)
     }
 }
 
 
 const getDebts = async () => {
     try{
-        const readData = await fs.readFile(path.jsonPath, 'utf-8')
+        const readData = await fs.readFile(jsonPath, 'utf-8')
         let data = JSON.parse(readData)
         const debts = data.debts
         if(isNaN(debts)){
@@ -103,7 +102,7 @@ const getDebts = async () => {
         }
         console.log(`the debts in your account have a total of : ${debts}`)
     }catch(error){
-        console.error("There was an error in the function getDebts: " , error.message)
+        erroMessage('getDebts',error)
     }
 }
 
@@ -111,7 +110,7 @@ const getWishList = async () => {
 
     try{
 
-        const readData = await fs.readFile(path.jsonPath, 'utf-8')
+        const readData = await fs.readFile(jsonPath, 'utf-8')
         let data = JSON.parse(readData)
         
         const table = []
@@ -131,12 +130,46 @@ const getWishList = async () => {
 
         console.table(table)
     }catch(error){
-        console.error('there was an error on the function getWishList from getData', error.message)
+        erroMessage('getWishList',error)
     }
 
 }
 
 
+const getTaxes = async () => {
+    try{
+        const readData = await fs.readFile(jsonPath, 'utf-8')
+        let data = JSON.parse(readData)
+        const taxes = data.taxes
+        if(isNaN(taxes)){
+            throw new Error('there was an error on the archive')
+        }
+        console.log(`Your taxes are of a total of ${taxes}`)
+
+    }catch(error){
+        erroMessage('getTaxes', error)
+    }
+}
+
+const getObjetives = async () => {
+    try{
+        const readData = await fs.readFile(jsonPath, 'utf-8')
+        let data = JSON.parse(readData)
+        
+        const table = []
+
+        for(let i = data.Objetive.length -1; i >= 0; i--){
+            table.push({
+                name: data.Objetive[i].name,
+                money: data.Objetive[i].money
+            })
+        }
+
+        console.table(table)
+    }catch(error){
+        erroMessage('getObjetives', error)
+    }
+}
 
 
 module.exports = {
@@ -145,5 +178,7 @@ module.exports = {
     getBudget,
     getAllData,
     getDebts,
-    getWishList
+    getWishList,
+    getTaxes,
+    getObjetives
 }

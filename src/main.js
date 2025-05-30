@@ -7,6 +7,8 @@ const setData = require('./modules/setData');
 const commands = {
     setHistory : 'set history',
     setBudget : 'set budget',
+    setObjetive : 'set objetive',
+    getObjetive : 'get objetive',
     getHistory : 'get history',
     getBudget : 'get budget',
     getAllData: 'get allData',
@@ -15,7 +17,11 @@ const commands = {
     getWishlist: 'get wishList',
     setWishList: 'add wishList',
     setTaxes: 'set taxes',
+    getTaxes: 'get taxes',
+    setTaxes: 'set taxes',
+    getTaxes: 'get taxes',
     exit: 'exit'
+
 }
 
 
@@ -26,6 +32,9 @@ const table = [
     {option: 'change Budget', command: commands.setBudget},
     {option: 'change your debts value', command: commands.setDebts},
     {option: 'add a object to your wishlist', command: commands.setWishList},
+    {option: 'set a new objetive', command: commands.setObjetive},
+    {option: 'see your taxes', command: commands.getTaxes},
+    {option: 'see your objetives', command: commands.setObjetive},
     {option: 'see your History', command: commands.getHistory},
     {option: 'see the Budget', command: commands.getBudget},
     {option: 'see the debts', command: commands.getDebts},    
@@ -34,6 +43,10 @@ const table = [
     {option: 'set a new object to your wish list', command: commands.setWishList},
     {option: 'exit', command: commands.exit}
 ]
+
+
+
+
 
 
 // start the program
@@ -77,6 +90,10 @@ const main = async () => {
 
                 case commands.setDebts:
                     await setData.setDebts()
+                    break;
+
+                case commands.getTaxes:
+                    await getData.getTaxes()
                     break;
 
                 case commands.setWishList:

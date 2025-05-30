@@ -1,6 +1,6 @@
 const fs = require('fs/promises')
 const readline = require('readline');
-const {jsonPath,taxes} = require('./config');
+const {jsonPath,taxes, erroMessage} = require('./config');
 const {getCredit} = require('./getData') 
 
 const askQuestion = (query) => {
@@ -112,6 +112,23 @@ const setTaxes = async () => {
     }
 }
 
+const setObjetive = async () => {
+    try{
+        const readFile = await fs.readFile(jsonPath, 'utf-8')
+        let data = JSON.parse(readFile)
+
+        const name = await askQuestion("which is your objetive?: ")
+        let money = await askQuestion("How many money do you need? ")
+        money = Number(money)
+        
+        data.Objetive.push({name: name, money: money})
+
+        await fs.writeFile(jsonPath, JSON.stringify(data, null, 2), 'utf-8')
+
+    }catch(error){
+        erroMessage("setObjetive", error)
+    }   
+}
 
 
 
@@ -121,5 +138,6 @@ module.exports = {
     setHistory,
     setDebts,
     setWishList,
-    setTaxes
+    setTaxes,
+    setObjetive
 }
