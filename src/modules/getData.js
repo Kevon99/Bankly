@@ -31,7 +31,7 @@ const getCredit = async () =>{
         // reescribir el archivo json
         data.credit = bonus
 
-        await fs.writeFile(path.jsonPath, JSON.stringify(data, null, 2))
+        await fs.writeFile(jsonPath, JSON.stringify(data, null, 2))
 
 
     }catch(error){
@@ -151,6 +151,7 @@ const getTaxes = async () => {
     }
 }
 
+
 const getObjetives = async () => {
     try{
         const readData = await fs.readFile(jsonPath, 'utf-8')
@@ -170,6 +171,8 @@ const getObjetives = async () => {
         erroMessage('getObjetives', error)
     }
 }
+
+
 
 
 module.exports = {
