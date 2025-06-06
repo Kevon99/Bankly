@@ -1,5 +1,6 @@
 const getData = require('./modules/getData');
 const setData = require('./modules/setData');
+const {setLevel} = require('./modules/level')
 
 
 // Asignation of variables.
@@ -25,7 +26,6 @@ const commands = {
 }
 
 
-
 const table = [
     {option: 'set your taxes :(', command : commands.setTaxes},
     {option: 'change History', command: commands.setHistory},
@@ -49,13 +49,17 @@ const table = [
 
 
 
+
+
 // start the program
 
 const main = async () => {
     try{
         while(true){
             console.clear()
+            await setLevel()        
             console.table(table)
+            
 
             const response = await setData.askQuestion('chose an option: ')
 
